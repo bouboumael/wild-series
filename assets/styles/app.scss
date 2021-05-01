@@ -1,0 +1,38 @@
+@import "~bootstrap/scss/bootstrap";
+
+$primary: #DB202C;
+$secondary: #020202;
+
+body {
+    background-color: $secondary;
+}
+
+.navbar {
+    height: 90px;
+}
+
+.logo {
+    width: 64px;
+    height: 82px;
+    margin-right: 19px
+}
+
+.navbar-brand {
+    img{
+        width: 175px;
+        height: 39px;
+    }
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.nav-link {
+    margin-right: 5px;;
+    .svg-navbar {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        width: 20px;
+    }
+}
