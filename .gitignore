@@ -7,8 +7,6 @@
 /public/bundles/
 /var/
 /vendor/
-.env
-.vscode
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -23,3 +21,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+.vscode
