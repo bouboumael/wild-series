@@ -21,7 +21,7 @@ class Episode
      * @ORM\ManyToOne(targetEntity=season::class, inversedBy="episodes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $season_id;
+    private $season;
 
     /**
      * @ORM\Column(type="string", length=255)

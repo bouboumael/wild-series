@@ -23,7 +23,7 @@ class Season
      * @ORM\ManyToOne(targetEntity=program::class, inversedBy="seasons")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $program_id;
+    private $program;
 
     /**
      * @ORM\Column(type="integer")
@@ -41,7 +41,7 @@ class Season
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Episode::class, mappedBy="season_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Episode::class, mappedBy="season", orphanRemoval=true)
      */
     private $episodes;
 
