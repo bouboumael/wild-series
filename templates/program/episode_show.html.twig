@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container d-flex flex-column justify-content-center">
+        <div class="card col-6 offset-3">
+            <h1 class="card-title text-center">{{program.title}}</h1>
+            <img src="{{program.poster}}" class="card-img-top" alt="{{ program.title }} poster">
+            <div class="card-body">
+                <h2 class="card-title text-center">Saison
+                    {{ season.number }}
+                    ({{ season.year }})</h2>
+                <h5 class="card-title">{{ episode.number }} - {{ episode.title}}</h5>
+                <p class="card-text">{{ episode.synopsis }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
