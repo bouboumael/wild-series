@@ -1,10 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Aladin&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
-$primary: #DB202C;
-$secondary: #020202;
+$primary-color: #db202c;
+$secondary-color: #020202;
+$title-font-primary: "Bebas Neue", cursive;
+$title-font-secondary: "Aladin", cursive;;
 
 body {
-    background-color: $secondary;
+    background-color: $secondary-color;
+    color: whitesmoke;
 }
 
 .navbar {
@@ -14,11 +19,11 @@ body {
 .logo {
     width: 64px;
     height: 82px;
-    margin-right: 19px
+    margin-right: 19px;
 }
 
 .navbar-brand {
-    img{
+    img {
         width: 175px;
         height: 39px;
     }
@@ -29,7 +34,7 @@ body {
 }
 
 .nav-link {
-    margin-right: 5px;;
+    margin-right: 5px;
     .svg-navbar {
         margin-right: 5px;
         margin-bottom: 5px;
@@ -37,6 +42,17 @@ body {
     }
 }
 
-.poster{
+.poster {
     width: 15%;
+}
+
+h1 {
+    font-family: $title-font-primary;
+}
+
+h2,
+h3,
+h4,
+h5 {
+    font-family: $title-font-secondary;
 }
