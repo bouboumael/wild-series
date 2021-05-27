@@ -5,3 +5,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 11 - Symfony : Le param converter = https://youtu.be/rbht4ng_AEs 
 
 12 - Symfony : Gardez la “form” = https://youtu.be/1LhV5uFI1k4 
+
+13 - Symfony : Générer un CRUD = https://youtu.be/-yAWlwrKmhY 
