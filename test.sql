@@ -29,3 +29,8 @@ php bin/console d:q:sql 'INSERT INTO episode (season_id, title, number, synopsis
 (2, "Bloodletting", 2, "After Carl is accidentally shot, the group are brought to a family living on a nearby farm. Shane makes a dangerous trip in search of medical supplies."),
 (2, "Save the Last One", 3, "As Carl condition continues to deteriorate, Shane and Otis try to dodge the walkers as they head back to the farm."),
 (2, "Cherokee Rose", 4, "With Carl recovering, the group puts their focus on finding Sophia. Glenn and Maggie go for a trip to find supplies.");'
+
+symfony console doctrine:query:sql 'INSERT INTO `actor` (`name`) VALUES ("Andrew Lincoln");'
+symfony console doctrine:query:sql 'INSERT INTO `actor` (`name`) VALUES ("Norman Reedus") ;'
+symfony console doctrine:query:sql 'INSERT INTO `actor` (`name`) VALUES ("Lauren Cohan") ;'
+symfony console doctrine:query:sql 'INSERT INTO `actor` (`name`) VALUES ("Danai Gurira") ;'
