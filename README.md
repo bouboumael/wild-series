@@ -12,3 +12,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 16 - Symfony : EntityType = https://youtu.be/YNifuC6H-PM 
 
+17 - Symfony : Les fixtures avancées avec jointures = https://youtu.be/RuNIkfR4RUc 
+
