@@ -10,3 +10,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 15 - Symfony : Doctrine relations “Many-To-Many” = https://youtu.be/M32CvyDbt_0 
 
+16 - Symfony : EntityType = https://youtu.be/YNifuC6H-PM 
+
