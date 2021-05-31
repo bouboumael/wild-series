@@ -34,7 +34,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             'year' => '2021',
             'category' => 'Humour'
         ],
-        'Wilder s Legacy' => [
+        'Wilder\'s Legacy' => [
             'summary' => 'Wilder\'s Legacy est une épopée super-héroïque multigénérationnelle qui suit la première génération de super-codeurs au monde à avoir reçu leurs pouvoirs dans les années 2020.',
             'poster' => 'https://fr.web.img3.acsta.net/c_310_420/pictures/21/04/15/12/13/2688584.jpg',
             'country' => 'France',
