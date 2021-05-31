@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Episode;
+use App\service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -26,7 +27,7 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
             'synopsis' => 'pas d\'inspi',
         ],
         [
-            'title' => "Bon ca se termine ?",
+            'title' => "Bon ca se termine",
             'number' => 4,
             'synopsis' => 'Ca commence à être long',
         ],
@@ -37,6 +38,13 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
         ],
     ];
 
+    private Slugify $slugify;
+
+    public function __construct(Slugify $slugify)
+    {
+        $this->slugify = $slugify;
+    }
+
     public function load(ObjectManager $manager)
     {
         foreach (ProgramFixtures::PROGRAMS as $programTitle => $programDescription) {
@@ -44,6 +52,7 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
                 foreach (self::EPISODES as $number => $episodeDescription) {
                     $episode = new Episode();
                     $episode->setTitle($episodeDescription['title']);
+                    $episode->setSlug($this->slugify->generate($episode->getTitle()));
                     $episode->setNumber($episodeDescription['number']);
                     $episode->setSynopsis($episodeDescription['synopsis']);
                     $episode->setSeason($this->getReference('season_'. $programTitle . '_' . $seasonTitle));
