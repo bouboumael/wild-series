@@ -37,7 +37,7 @@ class EpisodeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $slug = $slugify->generate($episode->getTitle());
-            $episode->setSlug($slug);
+            $episode->setSlug($episode->getSeason()->getProgram()->getTitle() . '_' . $slug);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($episode);
             $entityManager->flush();
@@ -52,7 +52,7 @@ class EpisodeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="episode_show", methods={"GET"})
+     * @Route("/{slug}", name="episode_show", methods={"GET"})
      */
     public function show(Episode $episode): Response
     {
@@ -62,7 +62,7 @@ class EpisodeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="episode_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="episode_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Episode $episode, Slugify $slugify): Response
     {
@@ -70,7 +70,7 @@ class EpisodeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $episode->setSlug($slugify->generate($episode->getTitle()));
+            $episode->setSlug($episode->getSeason()->getProgram()->getTitle() . '_' . $slugify->generate($episode->getTitle()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('episode_index');

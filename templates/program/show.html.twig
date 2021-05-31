@@ -6,7 +6,7 @@
     <ul class="mt-5 mb-5 d-flex justify-content-around list-unstyled">
         {% for season in seasons %}
             <li>
-                <a href="{{ path('program_season_show', {programId: program.id, seasonId: season.id}) }}">Season
+                <a href="{{ path('program_season_show', {slug: program.slug, seasonId: season.id}) }}">Season
                     {{ season.number }}
                 </a>
             </li>

@@ -52,7 +52,7 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
                 foreach (self::EPISODES as $number => $episodeDescription) {
                     $episode = new Episode();
                     $episode->setTitle($episodeDescription['title']);
-                    $episode->setSlug($this->slugify->generate($episode->getTitle()));
+                    $episode->setSlug($this->slugify->generate($programTitle .'-' . $episode->getTitle()));
                     $episode->setNumber($episodeDescription['number']);
                     $episode->setSynopsis($episodeDescription['synopsis']);
                     $episode->setSeason($this->getReference('season_'. $programTitle . '_' . $seasonTitle));
