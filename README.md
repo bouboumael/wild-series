@@ -15,3 +15,6 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 17 - Symfony : Les fixtures avancées avec jointures = https://youtu.be/RuNIkfR4RUc 
 
 18 - Symfony : Introduction aux “Services” = https://youtu.be/vNTIe_IBxvU 
+
+19 - Symfony : Envoi d’e-mail = https://youtu.be/zzppD5nqp9c 
+

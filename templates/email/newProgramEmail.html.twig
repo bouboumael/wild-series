@@ -1,0 +1,21 @@
+{% extends "email/layout_email.html.twig" %}
+{% block title %}
+    {{ parent() }}
+    Program
+{% endblock %}
+{% block body %}
+    <h1 style="color: blue;">New program
+        {{ program.title }}
+        created
+    </h1>
+    <div style="color: white;">
+        <p>Hello, the new program
+            {{ program.title }}
+            has been created on Wild Series
+        </p>
+        <p>
+            Summary :{{program.summary }}
+        </p>
+        <a href="http://127.0.0.1:8000/programs/{{ program.slug }}">View this program (If your localhost = 127.0.0.1:8000)</a>
+    </div>
+{% endblock %}
