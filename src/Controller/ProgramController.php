@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 /**
  * @Route("/programs", name="program_")
@@ -37,38 +39,11 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * Getting a program by id
-     *
-     * @Route("/{slug}", name="show")
-     *
-     * @return Response
-     */
-    public function show(Program $program): Response
-    {
-
-        $seasons = $this->getDoctrine()
-            ->getRepository(Season::class)
-            ->findBy([
-                'program' => $program
-            ]);
-
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with id : ' . $program->getId() . ' found in program\'s table.'
-            );
-        }
-        return $this->render('program/show.html.twig', [
-            'program' => $program,
-            'seasons' => $seasons,
-        ]);
-    }
-
-    /**
      * @Route("/new", name="new")
      *
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface $em, Slugify $slugify): Response
+    public function new(Request $request, EntityManagerInterface $em, Slugify $slugify, MailerInterface $mailer): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
@@ -78,13 +53,21 @@ class ProgramController extends AbstractController
             $program->setSlug($slug);
             $em->persist($program);
             $em->flush();
+
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to('bouboumael@gmail.com')
+                ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html($this->renderView('email/newProgramEmail.html.twig', ['program' => $program]));
+
+            $mailer->send($email);
+
             return $this->redirectToRoute('program_index');
         }
         return $this->render('program/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-
 
     /**
      * @Route("/{slug}/seasons/{seasonId}", name="season_show")
@@ -152,6 +135,33 @@ class ProgramController extends AbstractController
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
+        ]);
+    }
+
+    /**
+     * Getting a program by id
+     *
+     * @Route("/{slug}", name="show")
+     *
+     * @return Response
+     */
+    public function show(Program $program): Response
+    {
+
+        $seasons = $this->getDoctrine()
+            ->getRepository(Season::class)
+            ->findBy([
+                'program' => $program
+            ]);
+
+        if (!$program) {
+            throw $this->createNotFoundException(
+                'No program with id : ' . $program->getId() . ' found in program\'s table.'
+            );
+        }
+        return $this->render('program/show.html.twig', [
+            'program' => $program,
+            'seasons' => $seasons,
         ]);
     }
 }
