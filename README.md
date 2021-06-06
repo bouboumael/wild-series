@@ -20,3 +20,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 20 - Symfony : Gestion des utilisateurs = https://youtu.be/12qku9hPnsw 
 
+21 - Symfony : Sécurisons nos routes. = https://youtu.be/_UfOoJ7hclY 
+
