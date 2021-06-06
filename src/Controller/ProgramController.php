@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Season;
 use App\Entity\Episode;
 use App\Entity\Program;
+use App\Form\CommentType;
 use App\Form\ProgramType;
 use App\service\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
@@ -110,9 +112,8 @@ class ProgramController extends AbstractController
      * @ParamConverter("episode", class="App\Entity\Episode", options={"mapping": {"episodeSlug": "slug"}})
      * @return Response
      */
-    public function showEpisode(Program $program, Season $season, Episode $episode): Response
+    public function showEpisode(Request $request, Program $program, Season $season, Episode $episode, EntityManagerInterface $em): Response
     {
-
         if (!$program) {
             throw $this->createNotFoundException(
                 'No program with id : ' . $program->getId() . ' found in program\'s table.'
@@ -131,10 +132,23 @@ class ProgramController extends AbstractController
             );
         }
 
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setEpisode($episode);
+            $comment->setAuthor($this->getUser());
+            $em->persist($comment);
+            $em->flush();
+            return $this->redirect($request->getUri());
+        }
         return $this->render('program/episode_show.html.twig', [
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
+            'form' => $form->createView(),
+            'button_label' => 'Poster',
         ]);
     }
 
