@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="test">Bienvenue !</h1>
+    <h1 class="test">Bienvenue {{ app.user ? app.user.username : 'à vous' }}</h1>
+    <a class=" btn btn-success" href="{{ path('program_index') }}"> Voir les programs </a>
 {% endblock %}

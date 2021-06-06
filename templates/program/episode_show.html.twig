@@ -1,16 +1,37 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="container d-flex flex-column justify-content-center">
-        <div class="card col-6 offset-3">
+    <div class="container-fluid d-flex flex-column justify-content-center">
+        <div class="card col-lg-6 offset-lg-3 mt-2">
             <h1 class="card-title text-center">{{program.title}}</h1>
             <img src="{{program.poster}}" class="card-img-top" alt="{{ program.title }} poster">
             <div class="card-body">
                 <h2 class="card-title text-center">Saison
                     {{ season.number }}
                     ({{ season.year }})</h2>
-                <h5 class="card-title">{{ episode.number }} - {{ episode.title}}</h5>
+                <h5 class="card-title">{{ episode.number }}
+                    -
+                    {{ episode.title}}</h5>
                 <p class="card-text">{{ episode.synopsis }}</p>
             </div>
+            <a href="{{ path('program_season_show', {slug: program.slug, seasonId: season.id}) }}" class="stretched-link ms-3 mb-3">Retour à la saison</a>
+        </div>
+        {% if app.user %}
+            {% include "comment/_form.html.twig" %}
+        {% endif %}
+        <div class="mt-4 bg-white text-dark rounded p-3 col-lg-6 offset-lg-3">
+            <h2 class="ms-2">Commentaires:
+            </h2>
+            <ul class="list-unstyled">
+                {% for comment in episode.comments %}
+                    <li class="mb-2 col-12 border border-2 border-secondary rounded p-1 {{ loop.index % 2 ? : 'bg-secondary'  }}">
+                        {{ comment.author.username }} : {{ comment.comment }}
+                        <span class="float-end font-weight-bold"> ⭐ {{ comment.rate }} / 20</span>
+                    </li>
+                {% else %}
+                    <p class="h4 text-center">Aucun Commentaire</p>
+                {% endfor %}
+            </ul>
+
         </div>
     </div>
 {% endblock %}
