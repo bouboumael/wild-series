@@ -22,3 +22,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 21 - Symfony : Sécurisons nos routes. = https://youtu.be/_UfOoJ7hclY 
 
+22 - Symfony : Inscription d’un utilisateur = https://youtu.be/ikyz6yftT4U 
+

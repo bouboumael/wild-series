@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <h1>{{ app.user.username }}</h1>
+    <p>{{ app.user.email }}</p>
+    <p>Bon ok il y a rien mais l'inspiration me manque :)</p>
+{% endblock %}
