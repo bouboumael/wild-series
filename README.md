@@ -26,3 +26,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 23 - Symfony : Requêtes personnalisées = https://youtu.be/PPyqObKoJJc 
 
+28 - Symfony: Upload de médias avec Vich Upload ! = https://youtu.be/8aQrPQT93q8 
+
