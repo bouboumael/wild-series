@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProgramType extends AbstractType
 {
@@ -19,7 +20,9 @@ class ProgramType extends AbstractType
         $builder
             ->add('title')
             ->add('summary', TextType::class)
-            ->add('poster', UrlType::class)
+            ->add('poster', UrlType::class, [
+                'required' => false
+            ])
             ->add('country', TextType::class)
             ->add('year', IntegerType::class)
             ->add('category', null, [
@@ -31,6 +34,11 @@ class ProgramType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
+            ])
+            ->add('posterFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => true,
             ])
         ;
     }
