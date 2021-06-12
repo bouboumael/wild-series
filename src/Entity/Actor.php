@@ -6,9 +6,12 @@ use App\Repository\ActorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass=ActorRepository::class)
+ * @Vich\Uploadable
  */
 class Actor
 {
@@ -28,6 +31,17 @@ class Actor
      * @ORM\ManyToMany(targetEntity=Program::class, inversedBy="actors")
      */
     private $programs;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
+
+    /**
+     * @Vich\UploadableField(mapping="picture_file", fileNameProperty="picture")
+     * @var File
+     */
+    private $pictureFile;
 
     public function __construct()
     {
@@ -73,5 +87,28 @@ class Actor
         $this->programs->removeElement($program);
 
         return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function setPictureFile(File $pictureFile = null):Actor
+    {
+        $this->pictureFile = $pictureFile;
+        return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
     }
 }

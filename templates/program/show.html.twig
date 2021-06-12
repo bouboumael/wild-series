@@ -14,7 +14,11 @@
     </ul>
     <div class="d-flex d-flex flex-column justify-content-center col-4 offset-4">
         <div class="media">
-            <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+            {% if program.poster %}
+                <img class="align-self-start mr-3" src="{{ program.poster | src }}" alt="{{ program.title }} poster">
+                {% else %}
+                <p>Sorry there is no image for this program!</p>
+            {% endif %}
             <div class="media-body">
                 <h1 class="mt-0">{{ program.title }}</h1>
                 <p>{{ program.summary }}</p>

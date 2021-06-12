@@ -20,7 +20,9 @@ class ProgramType extends AbstractType
         $builder
             ->add('title')
             ->add('summary', TextType::class)
-            ->add('poster', UrlType::class)
+            ->add('poster', UrlType::class, [
+                'required' => false
+            ])
             ->add('country', TextType::class)
             ->add('year', IntegerType::class)
             ->add('category', null, [
