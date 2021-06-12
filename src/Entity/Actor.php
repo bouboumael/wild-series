@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ActorRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Repository\ActorRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass=ActorRepository::class)
@@ -35,13 +37,18 @@ class Actor
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $picture;
+    private $poster;
 
     /**
-     * @Vich\UploadableField(mapping="picture_file", fileNameProperty="picture")
+     * @Vich\UploadableField(mapping="poster_file", fileNameProperty="poster")
      * @var File
      */
-    private $pictureFile;
+    private $posterFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -89,26 +96,54 @@ class Actor
         return $this;
     }
 
-    public function getPicture(): ?string
+    /**
+     * Get the value of posterFile
+     *
+     * @return  File
+     */
+    public function getPosterFile(): ?File
     {
-        return $this->picture;
+        return $this->posterFile;
     }
 
-    public function setPicture(?string $picture): self
+    /**
+     * Set the value of posterFile
+     *
+     * @param  File  $posterFile
+     *
+     * @return  self
+     */
+    public function setPosterFile(File $posterFile = null): Actor
     {
-        $this->picture = $picture;
+        $this->posterFile = $posterFile;
+        if ($posterFile) {
+            $this->updatedAt = new DateTime('now');
+        }
 
         return $this;
     }
 
-    public function setPictureFile(File $pictureFile = null):Actor
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        $this->pictureFile = $pictureFile;
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
-    public function getPictureFile(): ?File
+    public function getPoster(): ?string
     {
-        return $this->pictureFile;
+        return $this->poster;
+    }
+
+    public function setPoster(?string $poster): self
+    {
+        $this->poster = $poster;
+
+        return $this;
     }
 }

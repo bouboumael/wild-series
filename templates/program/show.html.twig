@@ -16,7 +16,7 @@
         <div class="media">
             {% if program.poster %}
                 <img class="align-self-start mr-3" src="{{ program.poster | src }}" alt="{{ program.title }} poster">
-                {% else %}
+            {% else %}
                 <p>Sorry there is no image for this program!</p>
             {% endif %}
             <div class="media-body">
@@ -25,10 +25,14 @@
                 <p>Catégorie :
                     {{ program.category.name }}</p>
                 <strong>Acteurs :</strong>
-                <ul>
+                <ul class="mt-5">
                     {% for actor in program.actors %}
-                        <li>
-                            <a href="{{ path('actor_show', {id: actor.id}) }}">{{ actor.name }}</a>
+                        <li class="mb-3">
+                            <a href="{{ path('actor_show', {id: actor.id}) }}">
+                                {% if actor.poster %}
+                                    <img src="{{ actor.poster | src }}" alt="actor" class="actor-image me-2">
+                                {% endif %}
+                                {{ actor.name }}</a>
                         </li>
                     {% else %}
                         <li>Aucun acteur pour cette série</li>

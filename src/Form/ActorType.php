@@ -16,17 +16,17 @@ class ActorType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('posterFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => true,
+            ])
             ->add('programs', EntityType::class, [
                 'class' => Program::class,
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
-            ])
-            ->add('pictureFile', VichFileType::class, [
-                'required'      => false,
-                'allow_delete'  => true,
-                'download_uri' => true,
             ]);
     }
 
