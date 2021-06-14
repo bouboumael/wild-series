@@ -32,3 +32,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 25.1 - Symfony : Watchlist = https://youtu.be/PKvUS25k3RA 
 
+25.2 - Symfony : Watchlist avec AJAX ! = https://youtu.be/OA_MbnOAo2g 
+
