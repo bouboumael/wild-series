@@ -28,3 +28,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 28 - Symfony: Upload de médias avec Vich Upload ! = https://youtu.be/8aQrPQT93q8 
 
+24 - Symfony : Sessions et messages flash = https://youtu.be/Y0zpOg0fsao 
+

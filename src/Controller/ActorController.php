@@ -39,6 +39,8 @@ class ActorController extends AbstractController
             $entityManager->persist($actor);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Actor as been created');
+
             return $this->redirectToRoute('actor_index');
         }
 
@@ -76,7 +78,7 @@ class ActorController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('info', 'The Actor has been modified');
             return $this->redirectToRoute('actor_index');
         }
 
@@ -94,6 +96,7 @@ class ActorController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $actor->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($actor);
+            $this->addFlash('danger', 'The Actor has been deleted');
             $entityManager->flush();
         }
 
