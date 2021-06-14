@@ -30,3 +30,5 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 24 - Symfony : Sessions et messages flash = https://youtu.be/Y0zpOg0fsao 
 
+25.1 - Symfony : Watchlist = https://youtu.be/PKvUS25k3RA 
+

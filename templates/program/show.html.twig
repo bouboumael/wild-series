@@ -24,7 +24,12 @@
                 <p>{{ program.summary }}</p>
                 <p>Catégorie :
                     {{ program.category.name }}</p>
-                <strong>Acteurs :</strong>
+                <a href="{{ path('program_watchlist', {id: program.id})}}">
+                    <i class="bi {{ app.user and app.user.isInWatchlist(program) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
+                </a>
+                <h3 class="mt-3">
+                    <strong>Acteurs :</strong>
+                </h3>
                 <ul class="mt-5">
                     {% for actor in program.actors %}
                         <li class="mb-3">

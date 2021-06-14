@@ -18,7 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -247,6 +249,23 @@ class ProgramController extends AbstractController
         return $this->render('program/show.html.twig', [
             'program' => $program,
             'seasons' => $seasons,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/watchlist", name="watchlist", methods={"GET","POST"})
+     */
+    public function addToWatchList(Program $program, EntityManagerInterface $em): Response
+    {
+        if ($this->getUser()->isInWatchList($program)){
+            $this->getUser()->removeFromWatchlist($program);
+        } else {
+            $this->getUser()->addToWatchList($program);
+        }
+
+        $em->flush();
+        return $this->redirectToRoute('program_show', [
+            'slug' => $program->getSlug(),
         ]);
     }
 }
