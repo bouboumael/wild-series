@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -74,6 +75,8 @@ class ProgramController extends AbstractController
                 ->html($this->renderView('email/newProgramEmail.html.twig', ['program' => $program]));
 
             $mailer->send($email);
+
+            $this->addFlash('success', 'The new program has been created');
 
             return $this->redirectToRoute('program_index');
         }
@@ -152,6 +155,7 @@ class ProgramController extends AbstractController
                 $comment->setAuthor($this->getUser());
                 $em->persist($comment);
                 $em->flush();
+                $this->addFlash('success', 'Your comment has been send');
                 return $this->redirect($request->getUri());
             } else {
                 throw new AccessDeniedException('Only registred user can create an program!');
@@ -183,6 +187,7 @@ class ProgramController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('info', 'The program has been modified');
             return $this->redirectToRoute('program_index');
         }
 
@@ -208,6 +213,7 @@ class ProgramController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comment);
             $entityManager->flush();
+            $this->addFlash('danger', 'The program has been deleted');
         }
 
         return $this->redirectToRoute('program_episode_show', [

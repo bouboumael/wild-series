@@ -46,6 +46,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($category);
             $em->flush();
+            $this->addFlash('success', 'The new category has been created');
             return $this->redirectToRoute('category_index');
         }
         return $this->render('category/new.html.twig', [
