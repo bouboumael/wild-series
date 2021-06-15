@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Program;
+use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/categories", name="category_")
@@ -68,23 +69,32 @@ class CategoryController extends AbstractController
                 'name' => $categoryName
             ]);
 
-            if (!$category) {
-                throw $this->createNotFoundException(
-                    'No category with name : ' . $categoryName . ' found in category\'s table.'
-                );
-            }
+        if (!$category) {
+            throw $this->createNotFoundException(
+                'No category with name : ' . $categoryName . ' found in category\'s table.'
+            );
+        }
 
-            $programs = $this->getDoctrine()
+        $programs = $this->getDoctrine()
             ->getRepository(Program::class)
-            ->findBy([
+            ->findBy(
+                [
                     'category' => $category->getId()
                 ],
-            [
-                'id' => 'DESC'
-            ],
-        3);
+                [
+                    'id' => 'DESC'
+                ],
+                3
+            );
         return $this->render('category/show.html.twig', [
             'programs' => $programs,
+        ]);
+    }
+
+    public function dropdown(CategoryRepository $categoryRepository): Response
+    {
+        return $this->render('includes/_dropdown_navbar.html.twig', [
+            'categories' => $categoryRepository->findBy([], ['id' => 'DESC'])
         ]);
     }
 }

@@ -7,6 +7,7 @@
         </button>
         <div class="collapse navbar-collapse links-navbar" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+                {{ render(controller('App\\Controller\\CategoryController::dropdown')) }}
                 <a class="nav-link active" aria-current="page" href="#"><img src="{{ asset('build/etoile.svg') }}" alt="star" class="svg-navbar">Mes Favoris</a>
                 <a class="nav-link" href="#">FR<img src="{{ asset('build/world.svg') }}" alt="star" class="svg-navbar ms-2"></a>
                 {% if app.user %}
