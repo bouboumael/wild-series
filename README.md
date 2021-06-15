@@ -34,3 +34,4 @@ video 10-relation = https://youtu.be/7y_EQAkxu10
 
 25.2 - Symfony : Watchlist avec AJAX ! = https://youtu.be/OA_MbnOAo2g 
 
+27 - Symfony : Embedding Controller = https://youtu.be/8GfeRi7LX1w
